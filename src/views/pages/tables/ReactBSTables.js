@@ -14,15 +14,15 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React from "react"
 // react plugin that prints a given react component
-import ReactToPrint from "react-to-print";
+import ReactToPrint from "react-to-print"
 // react component for creating dynamic tables
-import BootstrapTable from "react-bootstrap-table-next";
-import paginationFactory from "react-bootstrap-table2-paginator";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import BootstrapTable from "react-bootstrap-table-next"
+import paginationFactory from "react-bootstrap-table2-paginator"
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit"
 // react component used to create sweet alerts
-import ReactBSAlert from "react-bootstrap-sweetalert";
+import ReactBSAlert from "react-bootstrap-sweetalert"
 // reactstrap components
 import {
   Button,
@@ -32,12 +32,12 @@ import {
   Container,
   Row,
   Col,
-  UncontrolledTooltip
-} from "reactstrap";
+  UncontrolledTooltip,
+} from "reactstrap"
 // core components
-import SimpleHeader from "components/Headers/SimpleHeader.js";
+import SimpleHeader from "components/Headers/SimpleHeader.js"
 
-import { dataTable } from "variables/general";
+import { dataTable } from "variables/general"
 
 const pagination = paginationFactory({
   page: 1,
@@ -45,86 +45,86 @@ const pagination = paginationFactory({
   showTotal: true,
   withFirstAndLast: false,
   sizePerPageRenderer: ({ options, currSizePerPage, onSizePerPageChange }) => (
-    <div className="dataTables_length" id="datatable-basic_length">
+    <div className='dataTables_length' id='datatable-basic_length'>
       <label>
         Show{" "}
         {
           <select
-            name="datatable-basic_length"
-            aria-controls="datatable-basic"
-            className="form-control form-control-sm"
-            onChange={e => onSizePerPageChange(e.target.value)}
+            name='datatable-basic_length'
+            aria-controls='datatable-basic'
+            className='form-control form-control-sm'
+            onChange={(e) => onSizePerPageChange(e.target.value)}
           >
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
+            <option value='10'>10</option>
+            <option value='25'>25</option>
+            <option value='50'>50</option>
+            <option value='100'>100</option>
           </select>
         }{" "}
         entries.
       </label>
     </div>
-  )
-});
+  ),
+})
 
-const { SearchBar } = Search;
+const { SearchBar } = Search
 
 class ReactBSTables extends React.Component {
   state = {
-    alert: null
-  };
+    alert: null,
+  }
   // this function will copy to clipboard an entire table,
   // so you can paste it inside an excel or csv file
-  copyToClipboardAsTable = el => {
+  copyToClipboardAsTable = (el) => {
     var body = document.body,
       range,
-      sel;
+      sel
     if (document.createRange && window.getSelection) {
-      range = document.createRange();
-      sel = window.getSelection();
-      sel.removeAllRanges();
+      range = document.createRange()
+      sel = window.getSelection()
+      sel.removeAllRanges()
       try {
-        range.selectNodeContents(el);
-        sel.addRange(range);
+        range.selectNodeContents(el)
+        sel.addRange(range)
       } catch (e) {
-        range.selectNode(el);
-        sel.addRange(range);
+        range.selectNode(el)
+        sel.addRange(range)
       }
-      document.execCommand("copy");
+      document.execCommand("copy")
     } else if (body.createTextRange) {
-      range = body.createTextRange();
-      range.moveToElementText(el);
-      range.select();
-      range.execCommand("Copy");
+      range = body.createTextRange()
+      range.moveToElementText(el)
+      range.select()
+      range.execCommand("Copy")
     }
     this.setState({
       alert: (
         <ReactBSAlert
           success
           style={{ display: "block", marginTop: "-100px" }}
-          title="Good job!"
+          title='Good job!'
           onConfirm={() => this.setState({ alert: null })}
           onCancel={() => this.setState({ alert: null })}
-          confirmBtnBsStyle="info"
-          btnSize=""
+          confirmBtnBsStyle='info'
+          btnSize=''
         >
           Copied to clipboard!
         </ReactBSAlert>
-      )
-    });
-  };
+      ),
+    })
+  }
   render() {
     return (
       <>
         {this.state.alert}
-        <SimpleHeader name="React Tables" parentName="Tables" />
-        <Container className="mt--6" fluid>
+        <SimpleHeader name='React Tables' parentName='Tables' />
+        <Container className='mt--6' fluid>
           <Row>
-            <div className="col">
+            <div className='col'>
               <Card>
                 <CardHeader>
-                  <h3 className="mb-0">React Bootstrap Table 2</h3>
-                  <p className="text-sm mb-0">
+                  <h3 className='mb-0'>React Bootstrap Table 2</h3>
+                  <p className='text-sm mb-0'>
                     This is an exmaple of data table using the well known
                     react-bootstrap-table2 plugin. This is a minimal setup in
                     order to get started fast.
@@ -132,52 +132,52 @@ class ReactBSTables extends React.Component {
                 </CardHeader>
                 <ToolkitProvider
                   data={dataTable}
-                  keyField="name"
+                  keyField='name'
                   columns={[
                     {
                       dataField: "name",
                       text: "Name",
-                      sort: true
+                      sort: true,
                     },
                     {
                       dataField: "position",
                       text: "Position",
-                      sort: true
+                      sort: true,
                     },
                     {
                       dataField: "office",
                       text: "Office",
-                      sort: true
+                      sort: true,
                     },
                     {
                       dataField: "age",
                       text: "Age",
-                      sort: true
+                      sort: true,
                     },
                     {
                       dataField: "start_date",
                       text: "Start date",
-                      sort: true
+                      sort: true,
                     },
                     {
                       dataField: "salary",
                       text: "Salary",
-                      sort: true
-                    }
+                      sort: true,
+                    },
                   ]}
                   search
                 >
-                  {props => (
-                    <div className="py-4 table-responsive">
+                  {(props) => (
+                    <div className='py-4 table-responsive'>
                       <div
-                        id="datatable-basic_filter"
-                        className="dataTables_filter px-4 pb-1"
+                        id='datatable-basic_filter'
+                        className='dataTables_filter px-4 pb-1'
                       >
                         <label>
                           Search:
                           <SearchBar
-                            className="form-control-sm"
-                            placeholder=""
+                            className='form-control-sm'
+                            placeholder=''
                             {...props.searchProps}
                           />
                         </label>
@@ -194,8 +194,8 @@ class ReactBSTables extends React.Component {
               </Card>
               <Card>
                 <CardHeader>
-                  <h3 className="mb-0">Action buttons</h3>
-                  <p className="text-sm mb-0">
+                  <h3 className='mb-0'>Action buttons</h3>
+                  <p className='text-sm mb-0'>
                     This is an exmaple of data table using the well known
                     react-bootstrap-table2 plugin. This is a minimal setup in
                     order to get started fast.
@@ -203,52 +203,52 @@ class ReactBSTables extends React.Component {
                 </CardHeader>
                 <ToolkitProvider
                   data={dataTable}
-                  keyField="name"
+                  keyField='name'
                   columns={[
                     {
                       dataField: "name",
                       text: "Name",
-                      sort: true
+                      sort: true,
                     },
                     {
                       dataField: "position",
                       text: "Position",
-                      sort: true
+                      sort: true,
                     },
                     {
                       dataField: "office",
                       text: "Office",
-                      sort: true
+                      sort: true,
                     },
                     {
                       dataField: "age",
                       text: "Age",
-                      sort: true
+                      sort: true,
                     },
                     {
                       dataField: "start_date",
                       text: "Start date",
-                      sort: true
+                      sort: true,
                     },
                     {
                       dataField: "salary",
                       text: "Salary",
-                      sort: true
-                    }
+                      sort: true,
+                    },
                   ]}
                   search
                 >
-                  {props => (
-                    <div className="py-4 table-responsive">
+                  {(props) => (
+                    <div className='py-4 table-responsive'>
                       <Container fluid>
                         <Row>
                           <Col xs={12} sm={6}>
                             <ButtonGroup>
                               <Button
-                                className="buttons-copy buttons-html5"
-                                color="default"
-                                size="sm"
-                                id="copy-tooltip"
+                                className='buttons-copy buttons-html5'
+                                color='default'
+                                size='sm'
+                                id='copy-tooltip'
                                 onClick={() =>
                                   this.copyToClipboardAsTable(
                                     document.getElementById("react-bs-table")
@@ -260,10 +260,10 @@ class ReactBSTables extends React.Component {
                               <ReactToPrint
                                 trigger={() => (
                                   <Button
-                                    color="default"
-                                    size="sm"
-                                    className="buttons-copy buttons-html5"
-                                    id="print-tooltip"
+                                    color='default'
+                                    size='sm'
+                                    className='buttons-copy buttons-html5'
+                                    id='print-tooltip'
                                   >
                                     Print
                                   </Button>
@@ -272,15 +272,15 @@ class ReactBSTables extends React.Component {
                               />
                             </ButtonGroup>
                             <UncontrolledTooltip
-                              placement="top"
-                              target="print-tooltip"
+                              placement='top'
+                              target='print-tooltip'
                             >
                               This will open a print page with the visible rows
                               of the table.
                             </UncontrolledTooltip>
                             <UncontrolledTooltip
-                              placement="top"
-                              target="copy-tooltip"
+                              placement='top'
+                              target='copy-tooltip'
                             >
                               This will copy to your clipboard the visible rows
                               of the table.
@@ -288,14 +288,14 @@ class ReactBSTables extends React.Component {
                           </Col>
                           <Col xs={12} sm={6}>
                             <div
-                              id="datatable-basic_filter"
-                              className="dataTables_filter px-4 pb-1 float-right"
+                              id='datatable-basic_filter'
+                              className='dataTables_filter px-4 pb-1 float-right'
                             >
                               <label>
                                 Search:
                                 <SearchBar
-                                  className="form-control-sm"
-                                  placeholder=""
+                                  className='form-control-sm'
+                                  placeholder=''
                                   {...props.searchProps}
                                 />
                               </label>
@@ -304,12 +304,12 @@ class ReactBSTables extends React.Component {
                         </Row>
                       </Container>
                       <BootstrapTable
-                        ref={el => (this.componentRef = el)}
+                        ref={(el) => (this.componentRef = el)}
                         {...props.baseProps}
                         bootstrap4={true}
                         pagination={pagination}
                         bordered={false}
-                        id="react-bs-table"
+                        id='react-bs-table'
                       />
                     </div>
                   )}
@@ -319,8 +319,8 @@ class ReactBSTables extends React.Component {
           </Row>
         </Container>
       </>
-    );
+    )
   }
 }
 
-export default ReactBSTables;
+export default ReactBSTables
