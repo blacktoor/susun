@@ -15,62 +15,59 @@
 
 */
 /*eslint-disable*/
-import React from "react";
+import React from "react"
 
 // reactstrap components
-import { NavItem, NavLink, Nav, Container, Row, Col } from "reactstrap";
+import { NavItem, NavLink, Nav, Container, Row, Col } from "reactstrap"
 
 class Calendar extends React.Component {
   render() {
     return (
       <>
         <Container fluid>
-          <footer className="footer pt-0">
-            <Row className="align-items-center justify-content-lg-between">
-              <Col lg="6">
-                <div className="copyright text-center text-lg-left text-muted">
+          <footer className='footer pt-0'>
+            <Row className='align-items-center justify-content-lg-between'>
+              <Col lg='6'>
+                <div className='copyright text-center text-lg-left text-muted'>
                   © {new Date().getFullYear()}{" "}
                   <a
-                    className="font-weight-bold ml-1"
-                    href="https://www.creative-tim.com?ref=adpr-admin-footer"
-                    target="_blank"
+                    className='font-weight-bold ml-1'
+                    href='https://instagram.com/iamevansobeng'
+                    target='_blank'
                   >
-                    Creative Tim
+                    Evans Obeng
                   </a>
                 </div>
               </Col>
-              <Col lg="6">
-                <Nav className="nav-footer justify-content-center justify-content-lg-end">
+              <Col lg='6'>
+                <Nav className='nav-footer justify-content-center justify-content-lg-end'>
                   <NavItem>
                     <NavLink
-                      href="https://www.creative-tim.com?ref=adpr-admin-footer"
-                      target="_blank"
+                      href='https://facebook.com/iamevansobeng'
+                      target='_blank'
                     >
-                      Creative Tim
+                      Evans Obeng
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink href='https://etonan.com' target='_blank'>
+                      Website
                     </NavLink>
                   </NavItem>
                   <NavItem>
                     <NavLink
-                      href="https://www.creative-tim.com/presentation?ref=adpr-admin-footer"
-                      target="_blank"
+                      href='https://facebook.com/iamevansobeng'
+                      target='_blank'
                     >
-                      About Us
+                      Facebook
                     </NavLink>
                   </NavItem>
                   <NavItem>
                     <NavLink
-                      href="http://blog.creative-tim.com?ref=adpr-admin-footer"
-                      target="_blank"
+                      href='https://twitterinstagram.com/iamevansobeng'
+                      target='_blank'
                     >
-                      Blog
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      href="https://www.creative-tim.com/license?ref=adpr-admin-footer"
-                      target="_blank"
-                    >
-                      License
+                      Twitter
                     </NavLink>
                   </NavItem>
                 </Nav>
@@ -79,8 +76,8 @@ class Calendar extends React.Component {
           </footer>
         </Container>
       </>
-    );
+    )
   }
 }
 
-export default Calendar;
+export default Calendar

@@ -42,19 +42,35 @@ import Vector from "views/pages/maps/Vector.js"
 import Widgets from "views/pages/Widgets.js"
 
 import MyDashboard from "views/pages/dashboard/Dashboard.js"
+import LoanForm from "views/pages/applications/LoanForm"
 
 const routes = [
   {
     collapse: true,
     name: "Dashboard",
-    icon: "ni ni-paper-diploma text-indigo",
-    state: "dashboardsCollapse",
+    icon: "ni ni-palette text-indigo",
+    state: "dashboardCollapse",
     views: [
       {
         path: "/dashboards",
         name: "Dashboard",
         miniName: "D",
         component: MyDashboard,
+        layout: "/admin",
+      },
+    ],
+  },
+  {
+    collapse: true,
+    name: "Applications",
+    icon: "ni ni-collection text-indigo",
+    state: "ApplicationCollapse",
+    views: [
+      {
+        path: "/loan-application",
+        name: "Loan Application",
+        miniName: "L",
+        component: LoanForm,
         layout: "/admin",
       },
     ],
