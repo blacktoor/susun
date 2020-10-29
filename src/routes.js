@@ -43,8 +43,16 @@ import Widgets from "views/pages/Widgets.js"
 
 import MyDashboard from "views/pages/dashboard/Dashboard.js"
 import LoanForm from "views/pages/applications/LoanForm"
+import MLogin from "views/pages/main/Login"
 
 const routes = [
+  {
+    name: "Login",
+    icon: "ni ni-palette text-indigo",
+    path: "/login",
+    component: MLogin,
+    layout: "main",
+  },
   {
     collapse: true,
     name: "Dashboard",
