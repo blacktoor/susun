@@ -18,6 +18,7 @@ import {
 } from "reactstrap"
 import { useState } from "react"
 import validator from "validator"
+import { Link } from "react-router-dom"
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -104,7 +105,7 @@ const Login = () => {
                   </div>
                   <div className='h5 font-weight-300'>
                     Don't have an account ?{" "}
-                    <a href='#'> Register for an account</a>
+                    <Link to='/register'> Register for an account</Link>
                   </div>
                 </div>
               </CardBody>

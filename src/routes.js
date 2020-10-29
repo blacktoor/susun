@@ -44,8 +44,15 @@ import Widgets from "views/pages/Widgets.js"
 import MyDashboard from "views/pages/dashboard/Dashboard.js"
 import LoanForm from "views/pages/applications/LoanForm"
 import MLogin from "views/pages/main/Login"
+import MRegister from "views/pages/main/Register"
 
 const routes = [
+  {
+    name: "Register",
+    path: "/register",
+    component: MRegister,
+    layout: "main",
+  },
   {
     name: "Login",
     icon: "ni ni-palette text-indigo",
