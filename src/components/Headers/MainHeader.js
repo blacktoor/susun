@@ -5,7 +5,7 @@ import { Container, Row, Col } from "reactstrap"
 const MainHeader = (props) => {
   return (
     <>
-      <div className='header bg-gradient-info py-7 py-lg-8 pt-lg-9'>
+      <div className='header bg-gradient-info py-7 py-lg-4 pt-lg-5'>
         <Container>
           <div className='header-body text-center mb-7'>
             <Row className='justify-content-center'>

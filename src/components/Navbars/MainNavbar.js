@@ -15,6 +15,7 @@ import {
   UncontrolledTooltip,
   Button,
 } from "reactstrap"
+import Login from "views/pages/main/Login"
 
 const MainNavbar = () => {
   return (
@@ -79,18 +80,13 @@ const MainNavbar = () => {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to='/auth/login' tag={Link}>
+                <NavLink to='/login' tag={Link}>
                   <span className='nav-link-inner--text'>Login</span>
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to='/auth/register' tag={Link}>
+                <NavLink to='/register' tag={Link}>
                   <span className='nav-link-inner--text'>Register</span>
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink to='/auth/lock' tag={Link}>
-                  <span className='nav-link-inner--text'>Lock</span>
                 </NavLink>
               </NavItem>
             </Nav>
@@ -99,7 +95,7 @@ const MainNavbar = () => {
               <NavItem>
                 <NavLink
                   className='nav-link-icon'
-                  href='https://www.facebook.com/creativetim?ref=creative-tim'
+                  href='https://www.facebook.com/iamevansobeng'
                   id='tooltip601201423'
                   target='_blank'
                 >
@@ -115,7 +111,7 @@ const MainNavbar = () => {
               <NavItem>
                 <NavLink
                   className='nav-link-icon'
-                  href='https://www.instagram.com/creativetimofficial?ref=creative-tim'
+                  href='https://www.instagram.com/iamevansobeng'
                   id='tooltip871243015'
                   target='_blank'
                 >
@@ -131,7 +127,7 @@ const MainNavbar = () => {
               <NavItem>
                 <NavLink
                   className='nav-link-icon'
-                  href='https://twitter.com/creativetim?ref=creative-tim'
+                  href='https://twitter.com/iamevansobeng'
                   id='tooltip366258619'
                   target='_blank'
                 >
@@ -147,7 +143,7 @@ const MainNavbar = () => {
               <NavItem>
                 <NavLink
                   className='nav-link-icon'
-                  href='https://github.com/creativetimofficial?ref=creative-tim'
+                  href='https://github.com/iamevansobeng'
                   id='tooltip931502898'
                   target='_blank'
                 >
@@ -162,13 +158,13 @@ const MainNavbar = () => {
                 <Button
                   className='btn-neutral btn-icon'
                   color='default'
-                  href='https://www.creative-tim.com/product/argon-dashboard-pro-react?ref=adpr-index-navbar'
+                  href='tel:+233 596 049 764'
                   target='_blank'
                 >
                   <span className='btn-inner--icon'>
-                    <i className='fas fa-shopping-cart mr-2' />
+                    <i className='fas fa-phone mr-2' />
                   </span>
-                  <span className='nav-link-inner--text'>Purchase now</span>
+                  <span className='nav-link-inner--text'>Contact Us </span>
                 </Button>
               </NavItem>
             </Nav>

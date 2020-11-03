@@ -19,13 +19,11 @@ import {
 } from "reactstrap"
 import { useState } from "react"
 import validator from "validator"
-import { useRef } from "react"
+import { Link } from "react-router-dom"
 
 const Register = () => {
-  const [name, setName] = useState({
-    firstName: "",
-    surname: "",
-  })
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   const [address, setAddress] = useState("")
   const [phone, setPhone] = useState("")
@@ -33,43 +31,40 @@ const Register = () => {
   const [password, setPassword] = useState("")
   const [password2, setPassword2] = useState("")
 
-  const [isOpen, setIsOpen] = useState(false)
-  const [alertMessage, setAlertMessage] = useState("")
   const onSubmit = (e) => {
     var tClass = false
     // CHECKING IF ALL FIELDS ARE IN THIER VALID STATES
     tClass = document.getElementsByClassName("is-invalid")
-    console.log(tClass.length)
     e.preventDefault()
+    const Data = {
+      firstName,
+      lastName,
+      email,
+      address,
+      phone,
+      occupation,
+      password,
+    }
     if (tClass.length !== 0) {
-      setIsOpen(true)
-      setAlertMessage("All fields must be filled with the right information")
-      setTimeout(() => {
-        setIsOpen(false)
-        setAlertMessage("")
-      }, 3500)
-    } else console.log("Wellcome")
+      alert("Error occured")
+    } else {
+      console.log(Data)
+    }
   }
   return (
     <>
       <MainHeader
         title='Register for a Free Account'
-        lead='Enter valid information only'
+        lead='Get started with Susun . FIll the form below with valid information'
       />
-      <Container className='mt--9' fluid>
+      <Container className='mt--7'>
         <Row className='justify-content-center'>
-          <Col sm={10} md={8} lg={6}>
-            <Card className='card-profile'>
-              <CardHeader>
-                <h3 className='text-center text-primary'>
-                  Signup for a free Account
-                </h3>
-              </CardHeader>
-
-              <CardBody className='justify-content-center'>
+          <Col md={6}>
+            <Card className='align-selft-center'>
+              <CardBody className=' offset-1 justify-content-center'>
                 <Form>
                   <Row className='form-row'>
-                    <Col md={8}>
+                    <Col md={10}>
                       <FormGroup>
                         <label
                           className='form-control-label'
@@ -86,33 +81,31 @@ const Register = () => {
                           <Input
                             id='firstName'
                             className={
-                              validator.isAlpha(name.firstName) &&
-                              name.firstName.toString().length >= 3
+                              validator.isAlpha(firstName) &&
+                              firstName.toString().length >= 3
                                 ? "is-valid"
                                 : "is-invalid"
                             }
                             placeholder='Firstname Here'
                             type='text'
-                            onChange={(n) =>
-                              setName({
-                                firstName: n.target.value,
-                                surname: name.surname,
-                              })
-                            }
+                            onChange={(f) => setFirstName(f.target.value)}
                           />
                           <div className='invalid-feedback'>
                             Enter your real Firstname , not a nickname
                           </div>
                           <div className='valid-feedback'>
-                            Your Firstname is {name.firstName}
+                            Your Firstname is {firstName}
                           </div>
                         </InputGroup>
                       </FormGroup>
                     </Col>
-                    <Col md={8}>
+                    <Col md={10}>
                       <FormGroup>
-                        <label className='form-control-label' htmlFor='surname'>
-                          Surname
+                        <label
+                          className='form-control-label'
+                          htmlFor='lastName'
+                        >
+                          LastName
                         </label>
                         <InputGroup>
                           <InputGroupAddon addonType='prepend'>
@@ -121,34 +114,29 @@ const Register = () => {
                             </InputGroupText>
                           </InputGroupAddon>
                           <Input
-                            id='surname'
+                            id='lastName'
                             className={
-                              validator.isAlpha(name.surname) &&
-                              name.surname.toString().length >= 3
+                              validator.isAlpha(lastName) &&
+                              lastName.toString().length >= 3
                                 ? "is-valid"
                                 : "is-invalid"
                             }
-                            placeholder='Surname here'
+                            placeholder='Lastname here'
                             type='email'
-                            value={name.surname}
-                            onChange={(s) =>
-                              setName({
-                                firstName: name.firstName,
-                                surname: s.target.value,
-                              })
-                            }
+                            value={lastName}
+                            onChange={(l) => setLastName(l.target.value)}
                           />
                           <div className='invalid-feedback'>
-                            Enter your real Surname , not a nickname
+                            Enter your real Lastname , not a nickname
                           </div>
                           <div className='valid-feedback'>
-                            Your surname is {name.surname}
+                            Your LastName is {lastName}
                           </div>
                         </InputGroup>
                       </FormGroup>
                     </Col>
 
-                    <Col md={8}>
+                    <Col md={10}>
                       <FormGroup>
                         <label className='form-control-label' htmlFor='email'>
                           Email
@@ -178,7 +166,7 @@ const Register = () => {
                         </InputGroup>
                       </FormGroup>
                     </Col>
-                    <Col md={8}>
+                    <Col md={10}>
                       <FormGroup>
                         <label className='form-control-label' htmlFor='address'>
                           Address
@@ -192,7 +180,6 @@ const Register = () => {
                           <Input
                             id='address'
                             className={
-                              validator.isAlpha(address) &&
                               address.toString().length >= 4
                                 ? "is-valid"
                                 : "is-invalid"
@@ -211,11 +198,7 @@ const Register = () => {
                         </InputGroup>
                       </FormGroup>
                     </Col>
-                    <Alert color='danger' isOpen={isOpen}>
-                      <i className='ni ni-air-baloon' />
-                      {alertMessage}
-                    </Alert>
-                    <Col md={8}>
+                    <Col md={10}>
                       <FormGroup>
                         <label className='form-control-label' htmlFor='phone'>
                           Phone
@@ -243,12 +226,12 @@ const Register = () => {
                             Good , your number is valid
                           </div>
                           <div className='invalid-feedback'>
-                            Your number is invalid
+                            Your number is invalid. Enter only numbers
                           </div>
                         </InputGroup>
                       </FormGroup>
                     </Col>
-                    <Col md={8}>
+                    <Col md={10}>
                       <FormGroup>
                         <label
                           className='form-control-label'
@@ -284,7 +267,7 @@ const Register = () => {
                         </InputGroup>
                       </FormGroup>
                     </Col>
-                    <Col md={8}>
+                    <Col md={10}>
                       <FormGroup>
                         <label
                           className='form-control-label'
@@ -318,7 +301,7 @@ const Register = () => {
                         </InputGroup>
                       </FormGroup>
                     </Col>
-                    <Col md={8}>
+                    <Col md={10}>
                       <FormGroup>
                         <label
                           className='form-control-label'
@@ -336,7 +319,8 @@ const Register = () => {
                             id='password2'
                             className={
                               validator.isAlphanumeric(password2) &&
-                              password === password2
+                              password === password2 &&
+                              password2.length > 5
                                 ? "is-valid"
                                 : "is-invalid"
                             }
@@ -346,7 +330,7 @@ const Register = () => {
                             onChange={(s) => setPassword2(s.target.value)}
                           />
                           <div className='invalid-feedback'>
-                            Passwords do not match
+                            Passwords do not match or less than 6 characters
                           </div>
                           <div className='valid-feedback'>
                             Great , your passwords match
@@ -355,7 +339,7 @@ const Register = () => {
                       </FormGroup>
                     </Col>
                   </Row>
-                  <Col className='offset-sm-0 offset-md-4 pb-3'>
+                  <Col className='offset-sm-0 offset-md-4 offset-lg-2 pb-3'>
                     <Button
                       className='btn-icon'
                       color='primary'
@@ -371,11 +355,14 @@ const Register = () => {
                 </Form>
                 <div className='text-center'>
                   <div className='h5 font-weight-300'>
-                    <a href='#'> Forgot Password ?</a>
-                  </div>
-                  <div className='h5 font-weight-300'>
-                    Don't have an account ?{" "}
-                    <a href='#'> Register for an account</a>
+                    Already have an account ?{" "}
+                    <Link
+                      to='/login'
+                      title='Login'
+                      style={{ letterSpacing: 0.6, fontWeight: 700 }}
+                    >
+                      Login
+                    </Link>
                   </div>
                 </div>
               </CardBody>

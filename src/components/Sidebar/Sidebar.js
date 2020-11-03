@@ -14,15 +14,15 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React from "react"
 // react library for routing
-import { NavLink as NavLinkRRD, Link } from "react-router-dom";
+import { NavLink as NavLinkRRD, Link } from "react-router-dom"
 // nodejs library that concatenates classes
-import classnames from "classnames";
+import classnames from "classnames"
 // nodejs library to set properties for components
-import { PropTypes } from "prop-types";
+import { PropTypes } from "prop-types"
 // react library that creates nice scrollbar on windows devices
-import PerfectScrollbar from "react-perfect-scrollbar";
+import PerfectScrollbar from "react-perfect-scrollbar"
 // reactstrap components
 import {
   Collapse,
@@ -30,124 +30,126 @@ import {
   Navbar,
   NavItem,
   NavLink,
-  Nav
-} from "reactstrap";
+  Nav,
+} from "reactstrap"
 
 class Sidebar extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       collapseOpen: false,
-      ...this.getCollapseStates(props.routes)
-    };
+      ...this.getCollapseStates(props.routes),
+    }
   }
   // verifies if routeName is the one active (in browser input)
-  activeRoute = routeName => {
-    return this.props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
-  };
+  activeRoute = (routeName) => {
+    return this.props.location.pathname.indexOf(routeName) > -1 ? "active" : ""
+  }
   // makes the sidenav normal on hover (actually when mouse enters on it)
   onMouseEnterSidenav = () => {
     if (!document.body.classList.contains("g-sidenav-pinned")) {
-      document.body.classList.add("g-sidenav-show");
+      document.body.classList.add("g-sidenav-show")
     }
-  };
+  }
   // makes the sidenav mini on hover (actually when mouse leaves from it)
   onMouseLeaveSidenav = () => {
     if (!document.body.classList.contains("g-sidenav-pinned")) {
-      document.body.classList.remove("g-sidenav-show");
+      document.body.classList.remove("g-sidenav-show")
     }
-  };
+  }
   // toggles collapse between opened and closed (true/false)
   toggleCollapse = () => {
     this.setState({
-      collapseOpen: !this.state.collapseOpen
-    });
-  };
+      collapseOpen: !this.state.collapseOpen,
+    })
+  }
   // closes the collapse
   closeCollapse = () => {
     this.setState({
-      collapseOpen: false
-    });
-  };
+      collapseOpen: false,
+    })
+  }
   // this creates the intial state of this component based on the collapse routes
   // that it gets through this.props.routes
-  getCollapseStates = routes => {
-    let initialState = {};
+  getCollapseStates = (routes) => {
+    let initialState = {}
     routes.map((prop, key) => {
       if (prop.collapse) {
         initialState = {
           [prop.state]: this.getCollapseInitialState(prop.views),
           ...this.getCollapseStates(prop.views),
-          ...initialState
-        };
+          ...initialState,
+        }
       }
-      return null;
-    });
-    return initialState;
-  };
+      return null
+    })
+    return initialState
+  }
   // this verifies if any of the collapses should be default opened on a rerender of this component
   // for example, on the refresh of the page,
   // while on the src/views/forms/RegularForms.js - route /admin/regular-forms
   getCollapseInitialState(routes) {
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse && this.getCollapseInitialState(routes[i].views)) {
-        return true;
+        return true
       } else if (window.location.href.indexOf(routes[i].path) !== -1) {
-        return true;
+        return true
       }
     }
-    return false;
+    return false
   }
   // this is used on mobile devices, when a user navigates
   // the sidebar will autoclose
   closeSidenav = () => {
     if (window.innerWidth < 1200) {
-      this.props.toggleSidenav();
+      this.props.toggleSidenav()
     }
-  };
+  }
   // this function creates the links and collapses that appear in the sidebar (left menu)
-  createLinks = routes => {
+  createLinks = (routes) => {
     return routes.map((prop, key) => {
       if (prop.redirect) {
-        return null;
+        return null
       }
       if (prop.collapse) {
-        var st = {};
-        st[prop["state"]] = !this.state[prop.state];
+        var st = {}
+        st[prop["state"]] = !this.state[prop.state]
+
         return (
           <NavItem key={key}>
             <NavLink
-              href="#pablo"
-              data-toggle="collapse"
+              href='#pablo'
+              data-toggle='collapse'
               aria-expanded={this.state[prop.state]}
               className={classnames({
-                active: this.getCollapseInitialState(prop.views)
+                active: this.getCollapseInitialState(prop.views),
               })}
-              onClick={e => {
-                e.preventDefault();
-                this.setState(st);
+              onClick={(e) => {
+                e.preventDefault()
+                this.setState(st)
               }}
             >
               {prop.icon ? (
                 <>
                   <i className={prop.icon} />
-                  <span className="nav-link-text">{prop.name}</span>
+                  <span className='nav-link-text'>{prop.name}</span>
                 </>
               ) : prop.miniName ? (
                 <>
-                  <span className="sidenav-mini-icon"> {prop.miniName} </span>
-                  <span className="sidenav-normal"> {prop.name} </span>
+                  <span className='sidenav-mini-icon'> {prop.miniName} </span>
+                  <span className='sidenav-normal'> {prop.name} </span>
                 </>
               ) : null}
             </NavLink>
             <Collapse isOpen={this.state[prop.state]}>
-              <Nav className="nav-sm flex-column">
+              <Nav className='nav-sm flex-column'>
                 {this.createLinks(prop.views)}
               </Nav>
             </Collapse>
           </NavItem>
-        );
-      }
+        )
+      } else if (prop.layout === "main") return null
+      // REMOVING SINGLE ROUTES THAT ARE NOT COLLAPSABLE
       return (
         <NavItem
           className={this.activeRoute(prop.layout + prop.path)}
@@ -155,119 +157,119 @@ class Sidebar extends React.Component {
         >
           <NavLink
             to={prop.layout + prop.path}
-            activeClassName=""
+            activeClassName=''
             onClick={this.closeSidenav}
             tag={NavLinkRRD}
           >
             {prop.icon !== undefined ? (
               <>
                 <i className={prop.icon} />
-                <span className="nav-link-text">{prop.name}</span>
+                <span className='nav-link-text'>{prop.name}</span>
               </>
             ) : prop.miniName !== undefined ? (
               <>
-                <span className="sidenav-mini-icon"> {prop.miniName} </span>
-                <span className="sidenav-normal"> {prop.name} </span>
+                <span className='sidenav-mini-icon'> {prop.miniName} </span>
+                <span className='sidenav-normal'> {prop.name} </span>
               </>
             ) : (
               prop.name
             )}
           </NavLink>
         </NavItem>
-      );
-    });
-  };
+      )
+    })
+  }
   render() {
-    const { routes, logo } = this.props;
-    let navbarBrandProps;
+    const { routes, logo } = this.props
+    let navbarBrandProps
     if (logo && logo.innerLink) {
       navbarBrandProps = {
         to: logo.innerLink,
-        tag: Link
-      };
+        tag: Link,
+      }
     } else if (logo && logo.outterLink) {
       navbarBrandProps = {
         href: logo.outterLink,
-        target: "_blank"
-      };
+        target: "_blank",
+      }
     }
     const scrollBarInner = (
-      <div className="scrollbar-inner">
-        <div className="sidenav-header d-flex align-items-center">
+      <div className='scrollbar-inner'>
+        <div className='sidenav-header d-flex align-items-center'>
           {logo ? (
             <NavbarBrand {...navbarBrandProps}>
               <img
                 alt={logo.imgAlt}
-                className="navbar-brand-img"
+                className='navbar-brand-img'
                 src={logo.imgSrc}
               />
             </NavbarBrand>
           ) : null}
-          <div className="ml-auto">
+          <div className='ml-auto'>
             <div
               className={classnames("sidenav-toggler d-none d-xl-block", {
-                active: this.props.sidenavOpen
+                active: this.props.sidenavOpen,
               })}
               onClick={this.props.toggleSidenav}
             >
-              <div className="sidenav-toggler-inner">
-                <i className="sidenav-toggler-line" />
-                <i className="sidenav-toggler-line" />
-                <i className="sidenav-toggler-line" />
+              <div className='sidenav-toggler-inner'>
+                <i className='sidenav-toggler-line' />
+                <i className='sidenav-toggler-line' />
+                <i className='sidenav-toggler-line' />
               </div>
             </div>
           </div>
         </div>
-        <div className="navbar-inner">
+        <div className='navbar-inner'>
           <Collapse navbar isOpen={true}>
             <Nav navbar>{this.createLinks(routes)}</Nav>
-            <hr className="my-3" />
-            <h6 className="navbar-heading p-0 text-muted">
-              <span className="docs-normal">Documentation</span>
-              <span className="docs-mini">D</span>
+            <hr className='my-3' />
+            <h6 className='navbar-heading p-0 text-muted'>
+              <span className='docs-normal'>Documentation</span>
+              <span className='docs-mini'>D</span>
             </h6>
-            <Nav className="mb-md-3" navbar>
+            <Nav className='mb-md-3' navbar>
               <NavItem>
                 <NavLink
-                  href="https://demos.creative-tim.com/argon-dashboard-pro-react/#/documentation/overview?ref=adpr-sidebar"
-                  target="_blank"
+                  href='https://demos.creative-tim.com/argon-dashboard-pro-react/#/documentation/overview?ref=adpr-sidebar'
+                  target='_blank'
                 >
-                  <i className="ni ni-spaceship" />
-                  <span className="nav-link-text">Getting started</span>
+                  <i className='ni ni-spaceship' />
+                  <span className='nav-link-text'>Getting started</span>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink
-                  href="https://demos.creative-tim.com/argon-dashboard-pro-react/#/documentation/colors?ref=adpr-sidebar"
-                  target="_blank"
+                  href='https://demos.creative-tim.com/argon-dashboard-pro-react/#/documentation/colors?ref=adpr-sidebar'
+                  target='_blank'
                 >
-                  <i className="ni ni-palette" />
-                  <span className="nav-link-text">Foundation</span>
+                  <i className='ni ni-palette' />
+                  <span className='nav-link-text'>Foundation</span>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink
-                  href="https://demos.creative-tim.com/argon-dashboard-pro-react/#/documentation/alert?ref=adpr-sidebar"
-                  target="_blank"
+                  href='https://demos.creative-tim.com/argon-dashboard-pro-react/#/documentation/alert?ref=adpr-sidebar'
+                  target='_blank'
                 >
-                  <i className="ni ni-ui-04" />
-                  <span className="nav-link-text">Components</span>
+                  <i className='ni ni-ui-04' />
+                  <span className='nav-link-text'>Components</span>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink
-                  href="https://demos.creative-tim.com/argon-dashboard-pro-react/#/documentation/charts?ref=adpr-sidebar"
-                  target="_blank"
+                  href='https://demos.creative-tim.com/argon-dashboard-pro-react/#/documentation/charts?ref=adpr-sidebar'
+                  target='_blank'
                 >
-                  <i className="ni ni-chart-pie-35" />
-                  <span className="nav-link-text">Plugins</span>
+                  <i className='ni ni-chart-pie-35' />
+                  <span className='nav-link-text'>Plugins</span>
                 </NavLink>
               </NavItem>
             </Nav>
           </Collapse>
         </div>
       </div>
-    );
+    )
     return (
       <Navbar
         className={
@@ -283,7 +285,7 @@ class Sidebar extends React.Component {
           scrollBarInner
         )}
       </Navbar>
-    );
+    )
   }
 }
 
@@ -291,8 +293,8 @@ Sidebar.defaultProps = {
   routes: [{}],
   toggleSidenav: () => {},
   sidenavOpen: false,
-  rtlActive: false
-};
+  rtlActive: false,
+}
 
 Sidebar.propTypes = {
   // function used to make sidenav mini or normal
@@ -312,10 +314,10 @@ Sidebar.propTypes = {
     // the image src of the logo
     imgSrc: PropTypes.string.isRequired,
     // the alt for the img
-    imgAlt: PropTypes.string.isRequired
+    imgAlt: PropTypes.string.isRequired,
   }),
   // rtl active, this will make the sidebar to stay on the right side
-  rtlActive: PropTypes.bool
-};
+  rtlActive: PropTypes.bool,
+}
 
-export default Sidebar;
+export default Sidebar

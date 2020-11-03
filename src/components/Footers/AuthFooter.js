@@ -20,7 +20,7 @@ import React from "react"
 // reactstrap components
 import { NavItem, NavLink, Nav, Container, Row, Col } from "reactstrap"
 
-class Login extends React.Component {
+class AuthFooter extends React.Component {
   render() {
     return (
       <>
@@ -83,4 +83,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login
+export default AuthFooter

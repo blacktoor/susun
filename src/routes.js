@@ -26,12 +26,10 @@ import Google from "views/pages/maps/Google.js"
 import Grid from "views/pages/components/Grid.js"
 import Icons from "views/pages/components/Icons.js"
 import Lock from "views/pages/examples/Lock.js"
-import Login from "views/pages/examples/Login.js"
 import Notifications from "views/pages/components/Notifications.js"
 import Pricing from "views/pages/examples/Pricing.js"
 import Profile from "views/pages/examples/Profile.js"
 import ReactBSTables from "views/pages/tables/ReactBSTables.js"
-import Register from "views/pages/examples/Register.js"
 import RTLSupport from "views/pages/examples/RTLSupport.js"
 import Sortable from "views/pages/tables/Sortable.js"
 import Tables from "views/pages/tables/Tables.js"
@@ -43,23 +41,10 @@ import Widgets from "views/pages/Widgets.js"
 
 import MyDashboard from "views/pages/dashboard/Dashboard.js"
 import LoanForm from "views/pages/applications/LoanForm"
-import MLogin from "views/pages/main/Login"
-import MRegister from "views/pages/main/Register"
+import Login from "views/pages/main/Login"
+import Register from "views/pages/main/Register"
 
 const routes = [
-  {
-    name: "Register",
-    path: "/register",
-    component: MRegister,
-    layout: "main",
-  },
-  {
-    name: "Login",
-    icon: "ni ni-palette text-indigo",
-    path: "/login",
-    component: MLogin,
-    layout: "main",
-  },
   {
     collapse: true,
     name: "Dashboard",
@@ -345,6 +330,18 @@ const routes = [
     icon: "ni ni-calendar-grid-58 text-red",
     component: Calendar,
     layout: "/admin",
+  },
+  {
+    name: "Register",
+    path: "/register",
+    component: Register,
+    layout: "main",
+  },
+  {
+    name: "Login",
+    path: "/login",
+    component: Login,
+    layout: "main",
   },
 ]
 

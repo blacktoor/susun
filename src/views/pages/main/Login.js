@@ -6,6 +6,7 @@ import {
   Card,
   CardBody,
   CardImg,
+  Alert,
   CardHeader,
   Button,
   Col,
@@ -19,16 +20,27 @@ import {
 import { useState } from "react"
 import validator from "validator"
 import { Link } from "react-router-dom"
+
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+
+  const onSubmit = (e) => {
+    var tClass = false
+    // CHECKING IF ALL FIELDS ARE IN THIER VALID STATES
+    tClass = document.getElementsByClassName("is-invalid")
+    e.preventDefault()
+    if (tClass.length !== 0) {
+      return <Alert color='red' title='hello there' />
+    } else console.log(email + password)
+  }
   return (
     <>
       <MainHeader
         title='Account Login'
         lead='Enter your ceredentials to log into your account'
       />
-      <Container className='mt--8 pb-5'>
+      <Container className='mt--9 pt-lg-6 pb-5'>
         <Row className='justify-content-center'>
           <Col sm={10} md={8} lg={6}>
             <Card className='card-profile'>
@@ -75,7 +87,7 @@ const Login = () => {
                         <InputGroup>
                           <InputGroupAddon addonType='prepend'>
                             <InputGroupText>
-                              <i className='ni ni-lock-circle-open' />
+                              <i className='ni ni-key-25' />
                             </InputGroupText>
                           </InputGroupAddon>
                           <Input
@@ -91,7 +103,12 @@ const Login = () => {
                     </Col>
                   </Row>
                   <Col className='offset-sm-0 offset-md-4 pb-3'>
-                    <Button className='btn-icon' color='primary' type='button'>
+                    <Button
+                      className='btn-icon'
+                      onClick={onSubmit}
+                      color='primary'
+                      type='button'
+                    >
                       <span className='btn-inner--icon mr-1'>
                         <i className='ni ni-button-power' />
                       </span>
